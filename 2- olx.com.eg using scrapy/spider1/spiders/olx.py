@@ -63,32 +63,6 @@ class OlxSpider(scrapy.Spider):
         if page_num < 11 :
             yield response.follow(nxt_page , callback=self.parse )
 
-
-                # item = {
-                #         'title': title,
-                #         'price': price,
-                #         'location': location,
-                #         'creation_date': creation_date,
-                #         'link': link,
-                #         'url': response.url,
-
-                #     }
-
-
-                # items.append(item)
-
-
-
-
-                # yield {
-                #         'title':title,
-                #         'price': price,
-                # }
-
-
-            # Return data extracted
-
-
     def parse_job(self, response):
 
         title = response.request.meta['title']
@@ -132,9 +106,7 @@ class OlxSpider(scrapy.Spider):
         items.append(item)
 
     def closed(self, reason):
-        # create datafrane from the global list 'items'
         df = pd.DataFrame(items)
-        # do whatefer operations you want
         df.to_csv(f'olx{month_day_year}.csv', index=False)
 
 
